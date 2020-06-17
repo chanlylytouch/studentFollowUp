@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\User;
 use App\Student;
 use Illuminate\Http\Request;
 
@@ -14,7 +14,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::all();
+        // return view('home',compact('students'));
+        return view('home',compact('students'));
     }
 
     /**
@@ -81,5 +83,10 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         //
+    }
+
+    //out of follow up table
+    public function outFollowup(){
+        return view('student.studentOutFollowup');
     }
 }
