@@ -1,5 +1,5 @@
 <?php
-
+// use Illuminate\Support\Str; 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -26,26 +26,27 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
-        // DB::table('users')->insert(
-        //     array(
-        //         'firstname' => 'admin',
-        //         'lastname' => 'User',
-        //         'email' => 'admin@example.com',
-        //         'position_id' => 1,
-        //         'password' => bcrypt('password'),
-        //         'remember_token' => Str::random(10)
-        //     )
-        // );
-        // DB::table('users')->insert(
-        //     array(
-        //         'firstname' => 'normal',
-        //         'lastname' => 'User',
-        //         'email' => 'normal@example.com',
-        //         'position_id' => 4,
-        //         'password' => bcrypt('password'),
-        //         'remember_token' => Str::random(10)
-        //     )
-        // );
+        DB::table('users')->insert(
+            array(
+                'firstname' => 'admin',
+                'lastname' => 'user',
+                'email' => 'admin@example.com',
+                'position_id' => 1,
+                'password' => bcrypt('password'),
+                'remember_token' => Str::random(10)
+            )
+        );
+        DB::table('users')->insert(
+            array(
+                'firstname' => 'normal',
+                'lastname' => 'user',
+                'email' => 'normal@example.com',
+                'position_id' => 4,
+                'password' => bcrypt('password'),
+                'remember_token' => Str::random(10)
+            )
+        );
+        
     }
 
     /**
