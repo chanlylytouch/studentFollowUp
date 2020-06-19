@@ -113,7 +113,7 @@ class StudentController extends Controller
         $student->firstname = $request->get('firstname');
         $student->lastname = $request->get('lastname');
         if($request->picture == null){
-            $student ->picture = "student.png";
+            $student ->picture = "icons.png";
         }else {
             request()->validate([
                 'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -122,7 +122,6 @@ class StudentController extends Controller
             request()->picture->move(public_path('/img/'), $imageName);
             $student ->picture = $imageName;
         }
-        // $student->picture = $request->get('picture');
         $student->class = $request->get('class');
         $student->description = $request->get('description');
         $student->user_id = auth::id();
@@ -142,7 +141,7 @@ class StudentController extends Controller
     }
 
     //out of follow up table
-    public function outFollowup(){
-        return view('student.studentOutFollowup');
+    public function back(){
+        return redirect('/home');
     }
 }

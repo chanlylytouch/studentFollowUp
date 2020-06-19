@@ -24,20 +24,23 @@
                         </li>
                     </ul>
                     <br>
+                    @if (auth::id() == 1)
                     <!-- Tab panes -->
-                    <div class="tab-content">
+                      <div class="tab-content">
                         <div class="tab-pane container active" id="home"> 
                             <div class="container">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Student</button>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#centralModalSm">
+                                  Add Student
+                                </button>
                                 <br><br>    
                                 <table class="table table-hover">
                                 <thead>
                                     <tr>
                                     <th>ID</th>
-                                    <th>Picture</th>
+                                    <th>Profile</th>
                                     <th>Username</th>
                                     <th>Class</th>
-                                    <th>activeFollowUp</th>
+                                    <th>Action</th>
                                     </tr>
                                 </thead>
                                 
@@ -45,32 +48,31 @@
                                 
                                 <tbody>
                                     <tr>
-                                    <td>{{$student->id}}</td>
-                                    <td><img src="{{ asset('img/'.$student->picture) }}" alt="{{$student->picture}}" style="width: 70px; height: 70px;"></td>
-                                    {{-- <td><img src="/uploads/avatars/{{ $student->avatar }}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;"></td> --}}
-                                    <td>{{$student->firstname}}.{{$student->lastname}}</td>
-                                    <td>{{$student->class}}</td>
-                                    <td>{{$student->activeFollowUp}}
+                                      <td>{{$student->id}}</td>
+                                      <td><img src="{{ asset('img/'.$student->picture) }}" alt="{{$student->picture}}" style="width: 70px; height: 70px;"></td>
+                                      <td>{{$student->firstname}}.{{$student->lastname}}</td>
+                                      <td>{{$student->class}}</td>
+                                      <td>{{$student->activeFollowUp}}
                                         <a href=""><span class="material-icons text-danger">person_add_disabled</span></a>  
-                                        <a href=""><span class="material-icons text-success">how_to_reg </span></a>
-                                        <a href="{{ route('editStudent',$student->id)}}"><span class="material-icons text-success">edit </span></a>
-                                    </td>
+                                        &nbsp;&nbsp;<a href="{{ route('editStudent',$student->id)}}"><span class="material-icons text-success">edit </span></a>
+                                      </td>
                                     </tr>
                                 </tbody>
                                 @endforeach
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane container fade" id="menu1">
+                       
+                          <div class="tab-pane container fade" id="menu1">
                             <div class="container">
                                 <table class="table table-hover">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Picture</th>
+                                        <th>Profile</th>
                                         <th>Username</th>
                                         <th>Class</th>
-                                        <th>activeFollowUp</th>
+                                        <th>Action</th>
                                     </tr>
                                     </thead>
                                     
@@ -83,74 +85,149 @@
                                         <td>{{$student->firstname}}.{{$student->lastname}}</td>
                                         <td>{{$student->class}}</td>
                                         <td>{{$student->activeFollowUp}}
-                                            <a href=""><span class="material-icons text-success">how_to_reg </span></a>             
+                                            <a href=""><span class="material-icons text-danger">how_to_reg </span></a>             
                                         </td>
                                     </tr>
                                     </tbody>
                                     @endforeach
                                 </table>
                             </div>
+                        </div>  
+                      </div>
+                      @else
+                      <div class="tab-content">
+                        <div class="tab-pane container active" id="home"> 
+                            <div class="container">
+                                
+                                <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                    <th>ID</th>
+                                    <th>Profile</th>
+                                    <th>Username</th>
+                                    <th>Class</th>
+                                    <th>Action</th>
+                                    </tr>
+                                </thead>
+                                
+                                @foreach ($students as $student)
+                                
+                                <tbody>
+                                    <tr>
+                                      <td>{{$student->id}}</td>
+                                      <td><img src="{{ asset('img/'.$student->picture) }}" alt="{{$student->picture}}" style="width: 70px; height: 70px;"></td>
+                                      <td>{{$student->firstname}}.{{$student->lastname}}</td>
+                                      <td>{{$student->class}}</td>
+                                      <td>{{$student->activeFollowUp}}
+                                        {{-- <a href=""><span class="material-icons text-danger">person_add_disabled</span></a>   --}}
+                                        <a href=""><span class="material-icons text-success">how_to_reg </span></a>
+                                      </td>
+                                    </tr>
+                                </tbody>
+                                @endforeach
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                   
+                       
+                          <div class="tab-pane container fade" id="menu1">
+                            <div class="container">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Profile</th>
+                                        <th>Username</th>
+                                        <th>Class</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    
+                                    @foreach ($students as $student)
+                                    
+                                    <tbody>
+                                    <tr>
+                                        <td>{{$student->id}}</td>
+                                        <td><img src="{{ asset('img/'.$student->picture) }}" alt="{{$student->picture}}" style="width: 70px; height: 70px;"></td>
+                                        <td>{{$student->firstname}}.{{$student->lastname}}</td>
+                                        <td>{{$student->class}}</td>
+                                        <td>{{$student->activeFollowUp}}
+                                            <a href=""><span class="material-icons text-danger">how_to_reg </span></a>             
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    @endforeach
+                                </table>
+                            </div>
+                        </div>  
+                      </div>
+                      @endif
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-  <!-- The Modal -->
-  <div class="modal" id="myModal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-  
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title text-center">Add Student to follow up</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-  
-        <!-- Modal body -->
-        <div class="modal-body">
-              <form method="POST" enctype="multipart/form-data" action="{{ route('addStudent')}}">
-                @csrf
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="firstname">Firstname</label>
-                    <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Firstname">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="lastname">Lastname</label>
-                    <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Lastname">
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="picture">Picture</label>
-                    <input type="file" class="form-control" name="picture" id="picture">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="class">Class</label>
-                    <select id="class" class="form-control" name="class">
-                      <option selected>Choose...</option>
-                      <option>2021A</option>
-                      <option>2021B</option>
-                      <option>2021C</option>
-                      <option>2020WEP-A</option>
-                      <option>2020WEP-B</option>
-                      <option>2020SNA</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary float-right">Add Student</button>
-              </form>
-        </div> 
+<!-- Central Modal Small -->
+<div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <!-- Change class .modal-sm to change the size of the modal -->
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title w-100" id="myModalLabel">Add Student to follow up</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" enctype="multipart/form-data" action="{{ route('addStudent')}}">
+          @csrf
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="firstname">Firstname</label>
+              <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Firstname">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="lastname">Lastname</label>
+              <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Lastname">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="picture">Profile</label>
+              <input type="file" class="form-control" name="picture" id="picture">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="class">Class</label>
+              <select id="class" class="form-control" name="class">
+                <option selected>Choose...</option>
+                <option>2021A</option>
+                <option>2021B</option>
+                <option>2021C</option>
+                <option>2020WEP-A</option>
+                <option>2020WEP-B</option>
+                <option>2020SNA</option>
+              </select>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="tutor">Tutor</label>
+              <select id="class" class="form-control" name="class">
+                <option selected>Choose...</option>
+                <option>Normal</option>
+                <option>English Trainer</option>
+                <option>WEP Trainer</option>
+                <option>SNA Trainer</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+              <label for="description">Description</label>
+              <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary float-right">Save</button>
+        </form>
       </div>
     </div>
   </div>
-  
+</div>
+<!-- Central Modal large -->
 @endsection

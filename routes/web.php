@@ -20,7 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'StudentController@index')->name('home');
-Route::get('/outfollowup','StudentController@outFollowup')->name('outfollowup');
+Route::get('/back','StudentController@back')->name('back');
 Route::post('addStudent', 'StudentController@store')->name('addStudent');
 Route::get('editStudent/{student}', 'StudentController@edit')->name('editStudent');
 Route::put('updateStudent/{student}', 'StudentController@update')->name('edit');
