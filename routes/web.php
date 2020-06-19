@@ -21,4 +21,6 @@ Auth::routes();
 
 Route::get('/home', 'StudentController@index')->name('home');
 Route::get('/outfollowup','StudentController@outFollowup')->name('outfollowup');
-// Route::resource('students', 'StudentController')->name('students');
+Route::post('addStudent', 'StudentController@store')->name('addStudent');
+Route::get('editStudent/{student}', 'StudentController@edit')->name('editStudent');
+Route::put('updateStudent/{student}', 'StudentController@update')->name('edit');

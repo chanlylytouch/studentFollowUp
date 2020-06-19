@@ -46,12 +46,14 @@
                                 <tbody>
                                     <tr>
                                     <td>{{$student->id}}</td>
-                                    <td>{{$student->picture}}</td>
+                                    <td><img src="{{ asset('img/'.$student->picture) }}" alt="{{$student->picture}}" style="width: 70px; height: 70px;"></td>
+                                    {{-- <td><img src="/uploads/avatars/{{ $student->avatar }}" style="width:150px; height:150px; float:left; border-radius:50%; margin-right:25px;"></td> --}}
                                     <td>{{$student->firstname}}.{{$student->lastname}}</td>
                                     <td>{{$student->class}}</td>
                                     <td>{{$student->activeFollowUp}}
                                         <a href=""><span class="material-icons text-danger">person_add_disabled</span></a>  
                                         <a href=""><span class="material-icons text-success">how_to_reg </span></a>
+                                        <a href="{{ route('editStudent',$student->id)}}"><span class="material-icons text-success">edit </span></a>
                                     </td>
                                     </tr>
                                 </tbody>
@@ -77,7 +79,7 @@
                                     <tbody>
                                     <tr>
                                         <td>{{$student->id}}</td>
-                                        <td>{{$student->picture}}</td>
+                                        <td><img src="{{ asset('img/'.$student->picture) }}" alt="{{$student->picture}}" style="width: 70px; height: 70px;"></td>
                                         <td>{{$student->firstname}}.{{$student->lastname}}</td>
                                         <td>{{$student->class}}</td>
                                         <td>{{$student->activeFollowUp}}
@@ -110,7 +112,8 @@
   
         <!-- Modal body -->
         <div class="modal-body">
-            <form>
+              <form method="POST" enctype="multipart/form-data" action="{{ route('addStudent')}}">
+                @csrf
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="firstname">Firstname</label>

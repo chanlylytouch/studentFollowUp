@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\User;
+use Auth;
 use App\Student;
 use Illuminate\Http\Request;
 
@@ -37,7 +38,42 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        
+
+        // $picture = $request->file('Picture');
+        // $destinationPath = 'public/img/';
+        // $originalFile = $picture->getClientOriginalName();
+        // $picture->move($destinationPath, $originalFile);
+
+        
+        // if($request->hasFile('avatar')){
+    	// 	$avatar = $request->file('picture');
+    	// 	$filename = time() . '.' . $avatar->getClientOriginalExtension();
+        //     Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
+        
+        $user = User::all();
+        $student = new Student();  
+        if($request->picture == null){
+            $student ->picture = "student.png";
+        }else {
+            request()->validate([
+                'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $imageName = time().'.'.request()->picture->getClientOriginalExtension();
+            request()->picture->move(public_path('/img/'), $imageName);
+            $student ->picture = $imageName;
+        }
+            
+        $student->firstname = $request->get('firstname');
+        $student->lastname = $request->get('lastname');  
+        // $student->picture = $request->get('picture');
+        $student->class = $request->get('class');
+        $student->description = $request->get('description');
+        $student->user_id = auth::id();
+        $student->save();
+        // }
+        return redirect('/home');
     }
 
     /**
@@ -57,9 +93,11 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Student $student)
+    public function edit($student)
     {
-        //
+        $students = Student::find($student);
+        // dd($students);
+        return view('student.editStudent',compact('students'));
     }
 
     /**
@@ -69,9 +107,27 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, $student)
     {
-        //
+        $student = Student::find($student);
+        $student->firstname = $request->get('firstname');
+        $student->lastname = $request->get('lastname');
+        if($request->picture == null){
+            $student ->picture = "student.png";
+        }else {
+            request()->validate([
+                'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            $imageName = time().'.'.request()->picture->getClientOriginalExtension();
+            request()->picture->move(public_path('/img/'), $imageName);
+            $student ->picture = $imageName;
+        }
+        // $student->picture = $request->get('picture');
+        $student->class = $request->get('class');
+        $student->description = $request->get('description');
+        $student->user_id = auth::id();
+        $student->save();
+        return redirect('/home');
     }
 
     /**
