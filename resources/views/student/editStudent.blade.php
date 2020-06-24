@@ -10,7 +10,7 @@
           <h2 class="text-center">Edit Student</h2>
         </div>
         <div class="card-body">
-          <form method="POST" action="{{ route('edit',$students->id) }}" enctype="multipart/form-data">
+          <form method="POST" action="{{ route('updateStudent',$students->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-row">
@@ -43,11 +43,9 @@
               <div class="form-group col-md-4">
                 <label for="tutor">Tutor</label>
                 <select id="tutor" class="form-control" name="tutor">
-                  <option selected>Choose...</option>
+                  <option selected>{{$students->tutor}}</option>
                   <option>Normal</option>
-                  <option>English Trainer</option>
-                  <option>WEP Trainer</option>
-                  <option>SNA Trainer</option>
+                  <option>Admin</option>
                 </select>
               </div>
             </div>

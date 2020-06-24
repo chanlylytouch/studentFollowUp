@@ -11,4 +11,7 @@ class Student extends Model
     public function users(){
         return $this->belongsToMany(Student::class)->withPivot('comment');
     }
+    public function comments(){
+        return $this->hasMany('App\comment');
+    }
 }

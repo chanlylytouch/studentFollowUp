@@ -16,18 +16,7 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::all();
-        // return view('home',compact('students'));
         return view('home',compact('students'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -38,20 +27,6 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        
-        
-
-        // $picture = $request->file('Picture');
-        // $destinationPath = 'public/img/';
-        // $originalFile = $picture->getClientOriginalName();
-        // $picture->move($destinationPath, $originalFile);
-
-        
-        // if($request->hasFile('avatar')){
-    	// 	$avatar = $request->file('picture');
-    	// 	$filename = time() . '.' . $avatar->getClientOriginalExtension();
-        //     Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
-        
         $user = User::all();
         $student = new Student();  
         if($request->picture == null){
@@ -63,16 +38,14 @@ class StudentController extends Controller
             $imageName = time().'.'.request()->picture->getClientOriginalExtension();
             request()->picture->move(public_path('/img/'), $imageName);
             $student ->picture = $imageName;
-        }
-            
+        }         
         $student->firstname = $request->get('firstname');
         $student->lastname = $request->get('lastname');  
-        // $student->picture = $request->get('picture');
+        $student->tutor= $request->get('tutor');  
         $student->class = $request->get('class');
         $student->description = $request->get('description');
         $student->user_id = auth::id();
         $student->save();
-        // }
         return redirect('/home');
     }
 
@@ -82,9 +55,10 @@ class StudentController extends Controller
      * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student)
+    public function show($student)
     {
-        //
+        $students = Student::find($student);
+        return view('student.viewStudent',compact('students'));
     }
 
     /**
@@ -96,7 +70,6 @@ class StudentController extends Controller
     public function edit($student)
     {
         $students = Student::find($student);
-        // dd($students);
         return view('student.editStudent',compact('students'));
     }
 
@@ -124,24 +97,28 @@ class StudentController extends Controller
         }
         $student->class = $request->get('class');
         $student->description = $request->get('description');
+        $student->tutor = $request->get('tutor');
         $student->user_id = auth::id();
         $student->save();
         return redirect('/home');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Student  $student
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Student $student)
-    {
-        //
-    }
-
-    //out of follow up table
     public function back(){
         return redirect('/home');
     }
+
+    //update status of student to out of follow up
+    // public function updateActiveFollowup($id){
+    //     $student = Student::find($id);
+    //     $student->activeFollowup = true;
+    //     $student->save();
+    //     return back();
+    // }
+    //update status to follow up
+    // public function backActiveFollowup($id){
+    //     $student = Student::find($id);
+    //     $student->activeFollowup = false;
+    //     $student->save();
+    //     return back();
+    // }
 }

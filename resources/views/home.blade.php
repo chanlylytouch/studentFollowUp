@@ -24,7 +24,7 @@
                         </li>
                     </ul>
                     <br>
-                    @if (auth::id() == 1)
+                    @if (auth::user()->firstname == "admin")
                     <!-- Tab panes -->
                       <div class="tab-content">
                         <div class="tab-pane container active" id="home"> 
@@ -35,64 +35,70 @@
                                 <br><br>    
                                 <table class="table table-hover">
                                 <thead>
-                                    <tr>
-                                    <th>ID</th>
+                                    <tr>                                   
                                     <th>Profile</th>
                                     <th>Username</th>
                                     <th>Class</th>
+                                    <th>Comment</th>
                                     <th>Action</th>
                                     </tr>
                                 </thead>
                                 
                                 @foreach ($students as $student)
-                                
+                                  {{-- @if ($student->activeFollowup == 0) --}}
                                 <tbody>
-                                    <tr>
-                                      <td>{{$student->id}}</td>
+                                  <tr>
                                       <td><img src="{{ asset('img/'.$student->picture) }}" alt="{{$student->picture}}" style="width: 70px; height: 70px;"></td>
                                       <td>{{$student->firstname}}.{{$student->lastname}}</td>
                                       <td>{{$student->class}}</td>
-                                      <td>{{$student->activeFollowUp}}
-                                        <a href=""><span class="material-icons text-danger">person_add_disabled</span></a>  
+                                      <td><a href="{{ route('showcomment',$student->id) }}"><span class="material-icons text-primary">comment</span></a></td>                                                                               
+                                      <td>
+                                          @csrf
+                                          @method('PUT')
+                                          <a href=""><span class="material-icons text-danger">person_add_disabled</span></a>                                                                                  
+                                       
                                         &nbsp;&nbsp;<a href="{{ route('editStudent',$student->id)}}"><span class="material-icons text-success">edit </span></a>
+                                        {{-- &nbsp;&nbsp;<a href="{{ route('viewStudent',$student->id)}}"><span class="material-icons text-success">visibility</span></a> --}}
                                       </td>
                                     </tr>
-                                </tbody>
+                                  </tbody>
+                                  {{-- @endif --}}
                                 @endforeach
                                 </table>
                             </div>
                         </div>
-                       
+                        
                           <div class="tab-pane container fade" id="menu1">
                             <div class="container">
                                 <table class="table table-hover">
                                     <thead>
-                                    <tr>
-                                        <th>ID</th>
+                                    <tr>                                       
                                         <th>Profile</th>
                                         <th>Username</th>
                                         <th>Class</th>
+                                        <th>Comment</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     
                                     @foreach ($students as $student)
-                                    
+                                    {{-- @if ($student->activeFollowup == 1) --}}
                                     <tbody>
                                     <tr>
-                                        <td>{{$student->id}}</td>
                                         <td><img src="{{ asset('img/'.$student->picture) }}" alt="{{$student->picture}}" style="width: 70px; height: 70px;"></td>
                                         <td>{{$student->firstname}}.{{$student->lastname}}</td>
                                         <td>{{$student->class}}</td>
-                                        <td>{{$student->activeFollowUp}}
+                                        <td><a href="{{ route('showcomment',$student->id) }}"><span class="material-icons text-primary">comment</span></a></td>                                                                            
+                                        <td>
                                             <a href=""><span class="material-icons text-danger">how_to_reg </span></a>             
                                         </td>
                                     </tr>
                                     </tbody>
+                                    {{-- @endif --}}
                                     @endforeach
                                 </table>
                             </div>
-                        </div>  
+                        </div>                         
                       </div>
                       @else
                       <div class="tab-content">
@@ -101,29 +107,25 @@
                                 
                                 <table class="table table-hover">
                                 <thead>
-                                    <tr>
-                                    <th>ID</th>
+                                    <tr>                                   
                                     <th>Profile</th>
                                     <th>Username</th>
                                     <th>Class</th>
-                                    <th>Action</th>
+                                    <th>Comment</th>
                                     </tr>
                                 </thead>
                                 
                                 @foreach ($students as $student)
-                                
+                                {{-- @if ($student->activeFollowup == 0) --}}
                                 <tbody>
                                     <tr>
-                                      <td>{{$student->id}}</td>
                                       <td><img src="{{ asset('img/'.$student->picture) }}" alt="{{$student->picture}}" style="width: 70px; height: 70px;"></td>
                                       <td>{{$student->firstname}}.{{$student->lastname}}</td>
                                       <td>{{$student->class}}</td>
-                                      <td>{{$student->activeFollowUp}}
-                                        {{-- <a href=""><span class="material-icons text-danger">person_add_disabled</span></a>   --}}
-                                        <a href=""><span class="material-icons text-success">how_to_reg </span></a>
-                                      </td>
+                                      <td><a href="{{ route('showcomment',$student->id) }}"><span class="material-icons text-primary">comment</span></a></td>                                     
                                     </tr>
                                 </tbody>
+                                {{-- @endif --}}
                                 @endforeach
                                 </table>
                             </div>
@@ -133,28 +135,24 @@
                             <div class="container">
                                 <table class="table table-hover">
                                     <thead>
-                                    <tr>
-                                        <th>ID</th>
+                                    <tr>                                
                                         <th>Profile</th>
                                         <th>Username</th>
                                         <th>Class</th>
-                                        <th>Action</th>
+                                        <th>Comment</th>
                                     </tr>
                                     </thead>
                                     
                                     @foreach ($students as $student)
-                                    
+                                    {{-- @if ($student->activeFollowup == 1) --}}
                                     <tbody>
                                     <tr>
-                                        <td>{{$student->id}}</td>
                                         <td><img src="{{ asset('img/'.$student->picture) }}" alt="{{$student->picture}}" style="width: 70px; height: 70px;"></td>
                                         <td>{{$student->firstname}}.{{$student->lastname}}</td>
                                         <td>{{$student->class}}</td>
-                                        <td>{{$student->activeFollowUp}}
-                                            <a href=""><span class="material-icons text-danger">how_to_reg </span></a>             
-                                        </td>
-                                    </tr>
+                                        <td><a href="{{ route('showcomment',$student->id) }}"><span class="material-icons text-primary">comment</span></a></td>                                     
                                     </tbody>
+                                    {{-- @endif --}}
                                     @endforeach
                                 </table>
                             </div>
@@ -169,7 +167,6 @@
 
 <!-- Central Modal Small -->
 <div class="modal fade" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <!-- Change class .modal-sm to change the size of the modal -->
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -184,11 +181,11 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="firstname">Firstname</label>
-              <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Firstname">
+              <input type="text" class="form-control" name="firstname" id="firstname" placeholder="Firstname" required>
             </div>
             <div class="form-group col-md-6">
               <label for="lastname">Lastname</label>
-              <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Lastname">
+              <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Lastname" required>
             </div>
           </div>
           <div class="form-row">
@@ -198,7 +195,7 @@
             </div>
             <div class="form-group col-md-4">
               <label for="class">Class</label>
-              <select id="class" class="form-control" name="class">
+              <select id="class" class="form-control" name="class" required>
                 <option selected>Choose...</option>
                 <option>2021A</option>
                 <option>2021B</option>
@@ -210,12 +207,10 @@
             </div>
             <div class="form-group col-md-4">
               <label for="tutor">Tutor</label>
-              <select id="class" class="form-control" name="class">
+              <select id="class" class="form-control" name="tutor">
                 <option selected>Choose...</option>
                 <option>Normal</option>
-                <option>English Trainer</option>
-                <option>WEP Trainer</option>
-                <option>SNA Trainer</option>
+                <option>Admin</option>
               </select>
             </div>
           </div>
