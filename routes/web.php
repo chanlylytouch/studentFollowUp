@@ -24,8 +24,8 @@ Route::get('/back','StudentController@back')->name('back');
 Route::post('addStudent', 'StudentController@store')->name('addStudent');
 Route::get('editStudent/{student}', 'StudentController@edit')->name('editStudent');
 Route::put('updateStudent/{student}', 'StudentController@update')->name('updateStudent');
-// Route::get('updateActive/{id}', 'StudentController@updateActiveFollowup')->name('updateActive');
-// Route::get('backActive/{id}', 'StudentController@backActiveFollowup')->name('backActive');
+Route::get('updateActive/{id}', 'StudentController@updateActiveFollowup')->name('updateActive');
+Route::get('backActive/{id}', 'StudentController@backActiveFollowup')->name('backActive');
 Route::get('viewStudent/{student}','StudentController@show')->name('viewStudent');
 //comment route
 Route::get('show','CommentController@index')->name('show');

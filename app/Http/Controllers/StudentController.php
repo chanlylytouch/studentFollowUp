@@ -108,17 +108,17 @@ class StudentController extends Controller
     }
 
     //update status of student to out of follow up
-    // public function updateActiveFollowup($id){
-    //     $student = Student::find($id);
-    //     $student->activeFollowup = true;
-    //     $student->save();
-    //     return back();
-    // }
+    public function updateActiveFollowup($id){
+        $student = Student::find($id);
+        $student->activeFollowup = true;
+        $student->save();
+        return back();
+    }
     //update status to follow up
-    // public function backActiveFollowup($id){
-    //     $student = Student::find($id);
-    //     $student->activeFollowup = false;
-    //     $student->save();
-    //     return back();
-    // }
+    public function backActiveFollowup($id){
+        $student = Student::find($id);
+        $student->activeFollowup = false;
+        $student->save();
+        return back();
+    }
 }

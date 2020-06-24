@@ -45,7 +45,7 @@
                                 </thead>
                                 
                                 @foreach ($students as $student)
-                                  {{-- @if ($student->activeFollowup == 0) --}}
+                                  @if ($student->activeFollowup == 0)
                                 <tbody>
                                   <tr>
                                       <td><img src="{{ asset('img/'.$student->picture) }}" alt="{{$student->picture}}" style="width: 70px; height: 70px;"></td>
@@ -55,14 +55,14 @@
                                       <td>
                                           @csrf
                                           @method('PUT')
-                                          <a href=""><span class="material-icons text-danger">person_add_disabled</span></a>                                                                                  
+                                          <a href="{{ route('updateActive',$student->id) }}"><span class="material-icons text-danger">person_add_disabled</span></a>                                                                                  
                                        
                                         &nbsp;&nbsp;<a href="{{ route('editStudent',$student->id)}}"><span class="material-icons text-success">edit </span></a>
                                         {{-- &nbsp;&nbsp;<a href="{{ route('viewStudent',$student->id)}}"><span class="material-icons text-success">visibility</span></a> --}}
                                       </td>
                                     </tr>
                                   </tbody>
-                                  {{-- @endif --}}
+                                  @endif
                                 @endforeach
                                 </table>
                             </div>
@@ -82,7 +82,7 @@
                                     </thead>
                                     
                                     @foreach ($students as $student)
-                                    {{-- @if ($student->activeFollowup == 1) --}}
+                                    @if ($student->activeFollowup == 1)
                                     <tbody>
                                     <tr>
                                         <td><img src="{{ asset('img/'.$student->picture) }}" alt="{{$student->picture}}" style="width: 70px; height: 70px;"></td>
@@ -90,11 +90,11 @@
                                         <td>{{$student->class}}</td>
                                         <td><a href="{{ route('showcomment',$student->id) }}"><span class="material-icons text-primary">comment</span></a></td>                                                                            
                                         <td>
-                                            <a href=""><span class="material-icons text-danger">how_to_reg </span></a>             
+                                            <a href="{{ route('backActive',$student->id) }}"><span class="material-icons text-danger">how_to_reg </span></a>             
                                         </td>
                                     </tr>
                                     </tbody>
-                                    {{-- @endif --}}
+                                    @endif
                                     @endforeach
                                 </table>
                             </div>
@@ -116,7 +116,7 @@
                                 </thead>
                                 
                                 @foreach ($students as $student)
-                                {{-- @if ($student->activeFollowup == 0) --}}
+                                @if ($student->activeFollowup == 0)
                                 <tbody>
                                     <tr>
                                       <td><img src="{{ asset('img/'.$student->picture) }}" alt="{{$student->picture}}" style="width: 70px; height: 70px;"></td>
@@ -125,7 +125,7 @@
                                       <td><a href="{{ route('showcomment',$student->id) }}"><span class="material-icons text-primary">comment</span></a></td>                                     
                                     </tr>
                                 </tbody>
-                                {{-- @endif --}}
+                                @endif
                                 @endforeach
                                 </table>
                             </div>
@@ -144,7 +144,7 @@
                                     </thead>
                                     
                                     @foreach ($students as $student)
-                                    {{-- @if ($student->activeFollowup == 1) --}}
+                                    @if ($student->activeFollowup == 1)
                                     <tbody>
                                     <tr>
                                         <td><img src="{{ asset('img/'.$student->picture) }}" alt="{{$student->picture}}" style="width: 70px; height: 70px;"></td>
@@ -152,7 +152,7 @@
                                         <td>{{$student->class}}</td>
                                         <td><a href="{{ route('showcomment',$student->id) }}"><span class="material-icons text-primary">comment</span></a></td>                                     
                                     </tbody>
-                                    {{-- @endif --}}
+                                    @endif
                                     @endforeach
                                 </table>
                             </div>
