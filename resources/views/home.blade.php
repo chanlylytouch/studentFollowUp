@@ -197,12 +197,12 @@
               <label for="class">Class</label>
               <select id="class" class="form-control" name="class" required>
                 <option selected>Choose...</option>
-                <option>2021A</option>
-                <option>2021B</option>
-                <option>2021C</option>
-                <option>2020WEP-A</option>
-                <option>2020WEP-B</option>
-                <option>2020SNA</option>
+                <option value="2021A">2021A</option>
+                <option value="2021B">2021B</option>
+                <option value="2021C">2021C</option>
+                <option value="2020WEP-A">2020WEP-A</option>
+                <option value="2020WEP-B">2020WEP-B</option>
+                <option value="2020SNA">2020SNA</option>
               </select>
             </div>
             <div class="form-group col-md-4">
