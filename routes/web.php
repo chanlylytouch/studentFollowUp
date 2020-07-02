@@ -33,3 +33,7 @@ Route::get('showcomment/{id}','CommentController@show')->name('showcomment');
 Route::post('addcomment/{id}','CommentController@store')->name('addcomment');
 Route::put('edit/{id}','CommentController@update')->name('edit');
 Route::get('delete/{id}','CommentController@destroy')->name('delete');
+//user
+Route::get('user/{id}','UserController@show')->name('user');
+Route::get('showuser','UserController@index')->name('showuser');
+Route::post('adduser','UserController@store')->name('adduser');

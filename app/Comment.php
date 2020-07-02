@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     public function user(){
-        return $this->belongTo(User::class);
+        return $this->belongsTo('App\User');
     }
     public function studnet(){
-        return $this->belongTo(Student::class);
+        return $this->belongsTo(Student::class);
     }
 }

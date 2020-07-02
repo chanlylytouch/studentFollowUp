@@ -16,7 +16,9 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::all();
-        return view('home',compact('students'));
+        $tutors = User::all();
+        // dd($tutors);
+        return view('home',compact('students','tutors'));
     }
 
     /**
@@ -70,7 +72,8 @@ class StudentController extends Controller
     public function edit($student)
     {
         $students = Student::find($student);
-        return view('student.editStudent',compact('students'));
+        $tutors = User::all();
+        return view('student.editStudent',compact('students','tutors'));
     }
 
     /**

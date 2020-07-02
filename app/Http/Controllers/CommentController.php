@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Comment;
 use App\Student;
+use App\User;
 use Auth;
 class CommentController extends Controller
 {
@@ -54,7 +55,8 @@ class CommentController extends Controller
     public function show($id)
     {
         $student = Student::find($id);
-        return view('comment.showComment',compact('student'));
+        $tutors = User::all();
+        return view('comment.showComment',compact('student','tutors'));
     }
 
     /**

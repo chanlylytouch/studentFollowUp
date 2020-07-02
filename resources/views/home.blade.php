@@ -208,9 +208,9 @@
             <div class="form-group col-md-4">
               <label for="tutor">Tutor</label>
               <select id="class" class="form-control" name="tutor">
-                <option selected>Choose...</option>
-                <option>Normal</option>
-                <option>Admin</option>
+                @foreach ($tutors as $tutor)
+                    <option value="{{$tutor->id}}">{{$tutor->firstname}}</option>
+                  @endforeach
               </select>
             </div>
           </div>

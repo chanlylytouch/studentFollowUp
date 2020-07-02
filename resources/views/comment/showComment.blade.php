@@ -13,7 +13,11 @@
                     <h3><strong>{{$student->firstname." ".$student->lastname}}</strong> - {{$student->class}}</h3>
                     <strong>Description:</strong> {{$student->description}}
                     <br>
-                    Tutor: {{$student->tutor}}
+                    @foreach ($tutors as $tutor)
+                        @if ($student->user_id == $tutor->id)
+                            Tutor: {{$tutor->firstname}}
+                        @endif
+                    @endforeach
                     <br><br>
                     <form action="{{route('addcomment',$student->id)}}" method="POST">
                         @csrf
@@ -25,7 +29,7 @@
                     @foreach ($student->comments as $comment)  
                     <div class="container">
                         <img src="https://cdn2.vectorstock.com/i/1000x1000/25/31/user-icon-businessman-profile-man-avatar-vector-10552531.jpg" width="40" style="border-radius: 40px;" height="40">
-                        <strong>{{auth::user()->firstname }}</strong>  {{$comment->created_at }}
+                        <strong>{{$comment->user['firstname'] }}</strong>  {{$comment->created_at }}
                         <br>
                         <br>
                     </div>

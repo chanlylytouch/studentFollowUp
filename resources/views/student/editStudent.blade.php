@@ -31,21 +31,21 @@
               <div class="form-group col-md-4">
                 <label for="class">Class</label>
                 <select id="class" class="form-control" name="class" >
-                  <option selected>{{$students->class}}</option>
-                  <option>2021A</option>
-                  <option>2021B</option>
-                  <option>2021C</option>
-                  <option>2020WEP-A</option>
-                  <option>2020WEP-B</option>
-                  <option>2020SNA</option>
+                  {{-- <option selected>{{$students->class}}</option> --}}
+                  <option  {{old('class',$students->class)=="2021A"? 'selected':''}}>2021A</option>
+                  <option  {{old('class',$students->class)=="2021B"? 'selected':''}}>2021B</option>
+                  <option  {{old('class',$students->class)=="2021C"? 'selected':''}}>2021C</option>
+                  <option  {{old('class',$students->class)=="2020WEP-A"? 'selected':''}}>2020WEP-A</option>
+                  <option  {{old('class',$students->class)=="2020WEP-B"? 'selected':''}}>2020WEP-B</option>
+                  <option  {{old('class',$students->class)=="2020SNA"? 'selected':''}}>2020SNA</option>
                 </select>
               </div>
               <div class="form-group col-md-4">
                 <label for="tutor">Tutor</label>
                 <select id="tutor" class="form-control" name="tutor">
-                  <option selected>{{$students->tutor}}</option>
-                  <option>Normal</option>
-                  <option>Admin</option>
+                  @foreach ($tutors as $tutor)
+                    <option value="{{$tutor->id}}">{{$tutor->firstname}}</option>
+                  @endforeach
                 </select>
               </div>
             </div>
